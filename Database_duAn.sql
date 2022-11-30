@@ -1,0 +1,194 @@
+﻿DROP DATABASE CuaHangBanSach_Group2_IT17322
+CREATE DATABASE CuaHangBanSach_Group2_IT17322
+USE CuaHangBanSach_Group2_IT17322
+GO
+--Chuc vu
+CREATE TABLE ChucVu(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenCV NVARCHAR(50) NULL,
+  moTa NVARCHAR(225) NULL,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL
+)
+go
+
+-- Users
+CREATE TABLE Users(
+id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+idChucVu UNIQUEIDENTIFIER,
+ma VARCHAR(20) UNIQUE,
+ten NVARCHAR(30) NULL,
+cccd VARCHAR(30) NULL,
+ngaySinh DATE NULL,
+sdt VARCHAR(30) NULL,
+diaChi NVARCHAR(100) NULL,
+email VARCHAR(100) NULL,
+gioiTinh INT DEFAULT 0,
+matKhau VARCHAR(50) NULL,
+ngayTao DATE NULL,
+ngayCapNhat DATE NULL
+)
+GO
+
+-- Khách hàng
+CREATE TABLE KhachHang(
+id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+ma VARCHAR(20) UNIQUE,
+ten NVARCHAR(30) NULL,
+cccd VARCHAR(30) NULL,
+sdt VARCHAR(30) NULL,
+gioiTinh INT DEFAULT 0,
+diemTichLuy INT DEFAULT 0,
+ngayTao DATE NULL,
+ngayCapNhat DATE NULL
+)
+GO
+
+--HoaDon
+CREATE TABLE HoaDon(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenKH NVARCHAR(225) NULL,
+  idKhachHang UNIQUEIDENTIFIER,
+  idUser UNIQUEIDENTIFIER,
+  ngayTao DATE null,
+  ngayThanhToan DATE NULL,
+  tinhTrang INT DEFAULT 0,
+  tongTien DECIMAL(20,0) DEFAULT 0,
+  ghiChu NVARCHAR(225) NULL,
+  ngayCapNhat DATE NULL,
+  nguoiTao NVARCHAR(225) NUll,
+  nguoiCapNhat NVARCHAR(225) NULL
+)
+GO
+
+-- sach
+CREATE TABLE Sach(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenSach NVARCHAR(50) NULL,
+  tinhTrang INT DEFAULT 0,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL,
+  nguoiTao NVARCHAR(225) NUll,
+  nguoiCapNhat NVARCHAR(225) NULL
+)
+GO
+
+-- Tac gia
+CREATE TABLE TacGia(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenTG NVARCHAR(50) NULL,
+  ngaySinh DATE NULL,
+  ngayMat DATE NULL,
+  gioiTinh INT DEFAULT 0,
+  moTa NVARCHAR(225) NULL,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL
+)
+GO
+
+-- THE LOAI
+CREATE TABLE TheLoai(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenTL NVARCHAR(50) NULL,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL
+)
+GO
+
+-- NXB
+CREATE TABLE NXB(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenNXB NVARCHAR(50) NULL,
+  diaChi NVARCHAR(225) NULL,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL
+)
+GO
+
+-- hoa don chi tiet
+CREATE TABLE HoaDon_ChiTiet(
+  idHoaDon UNIQUEIDENTIFIER,
+  idChiTietSach UNIQUEIDENTIFIER,
+  tenSach NVARCHAR(50) NULL,
+  soLuong int,
+  donGia DECIMAL(20,0) DEFAULT 0,
+  thanhTien DECIMAL(20,0) DEFAULT 0,
+  ngayTao DATE NUll,
+  ngayCapNhat DATE NULL,
+  nguoiTao NVARCHAR(225) NUll,
+  nguoiCapNhat NVARCHAR(225) NULL
+)
+GO
+
+-- chi tiet sach
+CREATE TABLE ChiTiet_Sach(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  idSach UNIQUEIDENTIFIER,
+  idTacGia UNIQUEIDENTIFIER,
+  idTheLoai UNIQUEIDENTIFIER,
+  idNXB UNIQUEIDENTIFIER,
+  soLuongTon INT,
+  donGia DECIMAL(20,0) DEFAULT 0,
+  moTa NVARCHAR(225) NULL,
+  hinhAnh NVARCHAR(225) NULL,
+  ngayTao DATE NULL,
+  ngayCapNhat DATE NULL,
+  nguoiTao NVARCHAR(225) NUll,
+  nguoiCapNhat NVARCHAR(225) NULL
+)
+GO
+
+-- khuyến mãi
+CREATE TABLE KhuyenMai(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  ma VARCHAR(20) UNIQUE,
+  tenKhuyenMai NVARCHAR(50) NULL,
+  mucGiamGia int null,
+  thoiGianBatDau DATE NULL,
+  thoiGianKetThuc DATE NULL,
+  trangThai int DEFAULT 0
+)
+GO
+
+--sach_khuyemmai
+CREATE TABLE Sach_KhuyenMai(
+  id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+  idChiTiet_Sach UNIQUEIDENTIFIER,
+  idKhuyenMai UNIQUEIDENTIFIER,
+  donGia DECIMAL(20,0) DEFAULT 0,
+  soTienConLai DECIMAL(20,0) DEFAULT 0,
+  trangThai INT DEFAULT 0
+)
+
+-- moi quan he giua cac bang
+-- chi tiet sach - tac gia
+ALTER TABLE ChiTiet_Sach ADD CONSTRAINT FK_CTSach1 FOREIGN KEY (idTacGia) REFERENCES TacGia(id)
+-- chi tiet sach - the loai
+ALTER TABLE ChiTiet_Sach ADD CONSTRAINT FK_CTSach2 FOREIGN KEY (idTheLoai) REFERENCES TheLoai(id)
+-- chi tiet sach - NXB
+ALTER TABLE ChiTiet_Sach ADD CONSTRAINT FK_CTSach3 FOREIGN KEY (idNXB) REFERENCES NXB(id)
+-- chi tiet sach - sach
+ALTER TABLE ChiTiet_Sach ADD CONSTRAINT FK_CTSach4 FOREIGN KEY (idSach) REFERENCES Sach(id)
+-- Hoa don - Users
+ALTER TABLE HoaDon ADD CONSTRAINT FK_HoaDon1 FOREIGN KEY (idUser) REFERENCES Users(id)
+-- Users - Chuc vu
+ALTER TABLE Users ADD CONSTRAINT FK_Users FOREIGN KEY (idChucVu) REFERENCES ChucVu(id)
+--HOA DON CHI TIET - HOA DON
+ALTER TABLE HoaDon_ChiTiet ADD CONSTRAINT fk_HoaDonCT1 FOREIGN KEY (idHoaDon) REFERENCES HoaDon(id)
+--HOA DON CHI TIET - CHI TIET SACH
+ALTER TABLE HoaDon_ChiTiet ADD CONSTRAINT fk_HoaDonCT2 FOREIGN KEY (idChiTietSach) REFERENCES ChiTiet_Sach(id)
+--hoá đơn - khách hàng
+ALTER TABLE HoaDon ADD CONSTRAINT FK_HoaDon3 FOREIGN KEY (idKhachHang) REFERENCES KhachHang(id)
+--sach_khuyenMai - chiTiet_Sach
+ALTER TABLE Sach_KhuyenMai ADD CONSTRAINT FK_khuyenMai1 FOREIGN KEY (idChiTiet_Sach) REFERENCES ChiTiet_Sach(id)
+--sach_khuyenMai - khuyenMai
+ALTER TABLE Sach_KhuyenMai ADD CONSTRAINT FK_khuyenMai2 FOREIGN KEY (idKhuyenMai) REFERENCES KhuyenMai(id)
+
+INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV001', 'Nhân viên', 'Nhân viên')
+INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV002', 'Quản lý', 'Quản lý')
