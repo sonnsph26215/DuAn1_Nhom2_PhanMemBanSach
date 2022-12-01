@@ -192,3 +192,7 @@ ALTER TABLE Sach_KhuyenMai ADD CONSTRAINT FK_khuyenMai2 FOREIGN KEY (idKhuyenMai
 
 INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV001', 'Nhân viên', 'Nhân viên')
 INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV002', 'Quản lý', 'Quản lý')
+
+-- nhập thêm cột vào user
+ALTER TABLE Users
+ADD tinhTrang INT DEFAULT 0
