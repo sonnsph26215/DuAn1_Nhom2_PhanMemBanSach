@@ -19,19 +19,21 @@ public class GiaoDienUi extends javax.swing.JFrame {
     /**
      * Creates new form GiaoDienUi
      */
+  
     private HoaDonUI hoaDon;
-
     private ThongKeUI thongKe;
     private SachUI sach;
     private NhanVienUI nhanVien;
     private KhachHangUI khachHang;
     private KhuyenMaiUI khuyenMai;
     private BanHangUI banHang;
+    
 
-
+   
     public GiaoDienUi() {
         initComponents();
         dongHo();
+        
     }
 
     private GiaoDienUi(String name) {
@@ -564,9 +566,10 @@ public class GiaoDienUi extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (banHang == null) {
             banHang = new BanHangUI();
-            tabPan.add("Bán Hàng", banHang);
+            tabPan.add("Bán Hàng",banHang);
         }
         tabPan.setSelectedComponent(banHang);
+       
     }//GEN-LAST:event_lblGiaoDichMouseClicked
 
     private void lblGiaoDichMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGiaoDichMouseEntered
@@ -671,6 +674,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GiaoDienUi().setVisible(true);
+                new BanHangUI();
             }
         });
     }

@@ -1,8 +1,10 @@
 package com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,19 +30,23 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class HoaDon {
+public class HoaDon implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "ma")
+    @GeneratedValue
+    private UUID Id;
+    
+     @Column(name = "ma")
     private String ma;
 
     @Column(name = "tenKH")
     private String tenKH;
     
+    @ManyToOne
+    @JoinColumn(name = "idVC")
+    private Voucher voucher;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idKhachHang", referencedColumnName = "id")
     private KhachHang khachHang;
