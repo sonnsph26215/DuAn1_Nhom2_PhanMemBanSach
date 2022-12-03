@@ -1,7 +1,9 @@
 package com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel;
 
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,30 +25,30 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class KhuyenMai {
+public class KhuyenMai implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Id
     @Column(name = "id")
-    private Long id;
-    
+    @GeneratedValue
+    private UUID Id;
+
     @Column(name = "ma")
     private String ma;
-    
+
     @Column(name = "tenKhuyenMai")
     private String tenKhuyenMai;
-    
+
     @Column(name = "mucGiamGia")
     private Integer mucGiamGia;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "thoiGianBatDau")
     private Date thoiGianBatDau;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "thoiGianKetThuc")
     private Date thoiGianKetThuc;
-    
+
     @Column(name = "trangThai")
     private Integer trangThai;
 
