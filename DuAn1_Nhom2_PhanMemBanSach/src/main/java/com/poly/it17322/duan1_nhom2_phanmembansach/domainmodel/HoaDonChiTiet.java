@@ -3,8 +3,10 @@ package com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,16 +30,17 @@ import lombok.ToString;
 @NoArgsConstructor
 public class HoaDonChiTiet implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    @JoinColumn(name = "idHoaDon", referencedColumnName = "id")
+   @Id
+    @Column(name = "id")
+    @GeneratedValue
+    private UUID Id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idHoaDon", nullable = false)
     private HoaDon hoaDon;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    @JoinColumn(name = "idChiTietSach", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idChiTietSach", nullable = false)
     private ChiTietSach chiTietSach;
 
     @Column(name = "tenSach")
@@ -65,5 +68,8 @@ public class HoaDonChiTiet implements Serializable {
 
     @Column(name = "nguoiCapNhat")
     private String nguoiCapNhat;
-
+    
+     public BigDecimal thanhTien() {
+        return new BigDecimal(soLuong).multiply(donGia);
+    }
 }
