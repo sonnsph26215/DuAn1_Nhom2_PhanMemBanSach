@@ -1,5 +1,6 @@
 package com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Sach_KhuyenMai")
@@ -23,12 +25,12 @@ import java.math.BigDecimal;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Sach_KhuyenMai {
+public class Sach_KhuyenMai implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id
     @Column(name = "id")
-    private Long id;
+    @GeneratedValue
+    private UUID Id;
     
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "idChiTiet_Sach",referencedColumnName = "id" )
