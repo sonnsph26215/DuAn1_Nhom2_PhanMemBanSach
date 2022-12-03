@@ -30,7 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class HoaDonChiTiet implements Serializable {
 
-    Id
+   @Id
     @Column(name = "id")
     @GeneratedValue
     private UUID Id;
@@ -72,5 +72,4 @@ public class HoaDonChiTiet implements Serializable {
      public BigDecimal thanhTien() {
         return new BigDecimal(soLuong).multiply(donGia);
     }
-
 }

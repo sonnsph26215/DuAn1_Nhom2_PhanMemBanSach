@@ -12,6 +12,7 @@ import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.Sach_KhuyenMai;
 import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.TacGia;
 import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.TheLoai;
 import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.Users;
+import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.Voucher;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -48,6 +49,7 @@ public class HibernateUtil {
         conf.addAnnotatedClass(Users.class);
         conf.addAnnotatedClass(KhuyenMai.class);
         conf.addAnnotatedClass(Sach_KhuyenMai.class);
+        conf.addAnnotatedClass(Voucher.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
