@@ -22,11 +22,11 @@ public class DangNhap extends javax.swing.JDialog {
         Icon icon = new ImageIcon("log-in (1).png");
         this.txtIcon.setIcon(icon);
         
-        Icon iconUser = new ImageIcon("user (2)).png");
-        this.txtIcon.setIcon(icon);
+        Icon iconUser = new ImageIcon("user (2).png");
+        this.txtIconUser.setIcon(iconUser);
         
         Icon iconPassWord = new ImageIcon("security.png");
-        this.txtIcon.setIcon(icon);
+        this.txtIconPassWord.setIcon(iconPassWord);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,13 +38,13 @@ public class DangNhap extends javax.swing.JDialog {
         txtIcon = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
-        txtPassWord = new javax.swing.JTextField();
         txtErrorUserName = new javax.swing.JLabel();
         txtIconUser = new javax.swing.JLabel();
         txtIconPassWord = new javax.swing.JLabel();
         txtErrorPassWord = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
         txtQuenMatKhau = new javax.swing.JLabel();
+        txtPassWord = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,12 +84,6 @@ public class DangNhap extends javax.swing.JDialog {
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserNameActionPerformed(evt);
-            }
-        });
-
-        txtPassWord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPassWordActionPerformed(evt);
             }
         });
 
@@ -150,10 +144,10 @@ public class DangNhap extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtErrorPassWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPassWord)
-                                    .addComponent(btnDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                                    .addComponent(btnDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                                    .addComponent(txtPassWord)))
                             .addComponent(txtQuenMatKhau, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                        .addGap(0, 42, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,10 +194,6 @@ public class DangNhap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
-    private void txtPassWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassWordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPassWordActionPerformed
-
     private void txtQuenMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMatKhauMouseClicked
 
     }//GEN-LAST:event_txtQuenMatKhauMouseClicked
@@ -233,6 +223,8 @@ public class DangNhap extends javax.swing.JDialog {
             for (LogInReponse i : service.getAll()) {
                 if(userName.equals(i.getMa()) && passWord.equals(i.getMatKhau())) {
                     JOptionPane.showMessageDialog(this, "Dang nhap thanh cong!!!");
+                    GiaoDienUi giaoDien = new GiaoDienUi();
+                    giaoDien.setVisible(true);
                     
                     this.dispose();
                     return;
@@ -282,7 +274,7 @@ public class DangNhap extends javax.swing.JDialog {
     private javax.swing.JLabel txtIcon;
     private javax.swing.JLabel txtIconPassWord;
     private javax.swing.JLabel txtIconUser;
-    private javax.swing.JTextField txtPassWord;
+    private javax.swing.JPasswordField txtPassWord;
     private javax.swing.JLabel txtQuenMatKhau;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
