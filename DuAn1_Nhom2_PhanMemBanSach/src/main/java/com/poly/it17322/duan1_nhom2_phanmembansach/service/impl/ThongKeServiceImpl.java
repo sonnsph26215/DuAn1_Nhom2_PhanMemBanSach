@@ -33,7 +33,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     @Override
-    public ViewThongKe getTongHoaDonTuyChon(Date batDau, Date ketThuc) {
+    public ViewThongKe getTongHoaDonTuyChon(java.util.Date batDau, java.util.Date ketThuc) {
         return repository.getTongHoaDonTuyChon(batDau, ketThuc);
     }
 

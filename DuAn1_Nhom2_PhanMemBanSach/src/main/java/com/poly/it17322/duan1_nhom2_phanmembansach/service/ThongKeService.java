@@ -16,7 +16,7 @@ public interface ThongKeService {
     
     public ViewThongKe getTongHoaDonNam(Date nam);
     
-    public ViewThongKe getTongHoaDonTuyChon(Date batDau, Date ketThuc);
+    public ViewThongKe getTongHoaDonTuyChon(java.util.Date batDau, java.util.Date ketThuc);
     
     public List<ViewThongKeNgay> getViewNgayTrongThang(int thang, int nam);
     

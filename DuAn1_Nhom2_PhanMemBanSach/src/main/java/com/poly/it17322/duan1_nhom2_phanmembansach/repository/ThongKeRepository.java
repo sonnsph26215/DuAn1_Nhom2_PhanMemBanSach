@@ -74,7 +74,7 @@ public class ThongKeRepository {
         return viewThongKe;
     }
 
-    public ViewThongKe getTongHoaDonTuyChon(Date batDau, Date ketThuc) {
+    public ViewThongKe getTongHoaDonTuyChon(java.util.Date batDau, java.util.Date ketThuc) {
         Query q = session.createQuery("SELECT SUM(tongTien) AS doanhThu,\n"
                 + "                COUNT(*) AS soHD FROM HoaDon \n"
                 + "                WHERE ngayTao BETWEEN :batDau AND :ketThuc");

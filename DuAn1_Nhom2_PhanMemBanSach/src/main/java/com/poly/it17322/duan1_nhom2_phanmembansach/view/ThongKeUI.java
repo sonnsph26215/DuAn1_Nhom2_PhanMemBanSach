@@ -9,8 +9,12 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -251,6 +255,11 @@ public class ThongKeUI extends javax.swing.JPanel {
         );
 
         txtNgayChonDen.setDateFormatString("yyyy-MM-dd");
+        txtNgayChonDen.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtNgayChonDenPropertyChange(evt);
+            }
+        });
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +271,11 @@ public class ThongKeUI extends javax.swing.JPanel {
         jLabel5.setText("Đến: ");
 
         txtNgayChonTu.setDateFormatString("yyyy-MM-dd");
+        txtNgayChonTu.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtNgayChonTuPropertyChange(evt);
+            }
+        });
 
         jLabel6.setText("Từ:");
 
@@ -507,20 +521,18 @@ public class ThongKeUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        String batDauStr = txtNgayChonTu.getDateFormatString();
-        String ketThucStr = txtNgayChonDen.getDateFormatString();
-        
-        Date batDau = Date.valueOf(batDauStr);
-        Date ketThuc = Date.valueOf(ketThucStr);
+     
+        java.util.Date batDau = txtNgayChonTu.getDate();
+        java.util.Date ketThuc = txtNgayChonDen.getDate();
 
         int error = 0;
 
-        if (batDauStr.length() == 0) {
+        if (batDau.toString().length() == 0) {
             txtErrorNgayTu.setText("Khong duoc de trong!!");
             error++;
         }
 
-        if (ketThucStr.length() == 0) {
+        if (ketThuc.toString().length() == 0) {
             txtErrorNgayDen.setText("Khong duoc de trong!!");
             error++;
         }
@@ -549,6 +561,14 @@ public class ThongKeUI extends javax.swing.JPanel {
     private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         fillTpBangTK();
     }//GEN-LAST:event_cboNamActionPerformed
+
+    private void txtNgayChonTuPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtNgayChonTuPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayChonTuPropertyChange
+
+    private void txtNgayChonDenPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtNgayChonDenPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayChonDenPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
