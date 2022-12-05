@@ -6,15 +6,15 @@ package com.poly.it17322.duan1_nhom2_phanmembansach.view;
 
 //import com.poly.it17322.duan1_phanmembansach_nhom2.domainmodel.ChiTietSach;
 
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
+//import com.github.sarxos.webcam.Webcam;
+//import com.github.sarxos.webcam.WebcamPanel;
+//import com.github.sarxos.webcam.WebcamResolution;
+//import com.google.zxing.BinaryBitmap;
+//import com.google.zxing.LuminanceSource;
+//import com.google.zxing.MultiFormatReader;
+//import com.google.zxing.NotFoundException;
+//import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+//import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.Executor;
@@ -22,8 +22,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-import com.google.zxing.Result;
+//import org.netbeans.lib.awtextra.AbsoluteConstraints;
+//import com.google.zxing.Result;
 
 //import com.poly.it17322.duan1_phanmembansach_nhom2.reponse.HoaDonChiTietReponse;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.reponse.HoaDonReponse;
@@ -84,8 +84,8 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 //    private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-    private Webcam webcam = null;
-    private WebcamPanel panel = null;
+//    private Webcam webcam = null;
+//    private WebcamPanel panel = null;
     private JTextArea textarea = null;
 
     public BanHangUI() {
@@ -97,15 +97,15 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
     }
     
     public void initWebcam(JPanel panelShow) {
-        Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
-        webcam.setViewSize(size);
-
-        panel = new WebcamPanel(webcam);
-        panel.setPreferredSize(size);
-        panel.setFPSDisplayed(true);
-        panel.setMirrored(true);
-        panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
+//        Dimension size = WebcamResolution.QVGA.getSize();
+//        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+//        webcam.setViewSize(size);
+//
+//        panel = new WebcamPanel(webcam);
+//        panel.setPreferredSize(size);
+//        panel.setFPSDisplayed(true);
+//        panel.setMirrored(true);
+//        panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
 
         executor.execute(this);
     }
@@ -113,38 +113,38 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
     @Override
     public void run() {
 
-        do {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            Result result = null;
-            BufferedImage image = null;
-
-            if (webcam.isOpen()) {
-
-                if ((image = webcam.getImage()) == null) {
-                    continue;
-                }
-
-                LuminanceSource source = new BufferedImageLuminanceSource(image);
-                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
-                try {
-                    result = new MultiFormatReader().decode(bitmap);
-                } catch (NotFoundException e) {
-                    // fall thru, it means there is no QR code in image
-                }
-            }
-
-            if (result != null) {
-//                textarea.setText(result.getText());
-                System.out.println(result);
-            }
-
-        } while (true);
+//        do {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+////            Result result = null;
+//            BufferedImage image = null;
+//
+//            if (webcam.isOpen()) {
+//
+//                if ((image = webcam.getImage()) == null) {
+//                    continue;
+//                }
+//
+//                LuminanceSource source = new BufferedImageLuminanceSource(image);
+//                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+//
+//                try {
+//                    result = new MultiFormatReader().decode(bitmap);
+//                } catch (NotFoundException e) {
+//                    // fall thru, it means there is no QR code in image
+//                }
+//            }
+//
+//            if (result != null) {
+////                textarea.setText(result.getText());
+//                System.out.println(result);
+//            }
+//
+//        } while (true);
     }
 
     @Override
