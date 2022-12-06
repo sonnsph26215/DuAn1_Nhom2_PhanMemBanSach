@@ -16,9 +16,9 @@ public interface NhanVienService {
     
      public List<Users> getAll();
     
-//    Users getUserByMa(String ma);
-//
-//    public Users getOne(Long id);
+    Users getUserByMa(String ma);
+
+    public Users getOne(Long id);
 
     public List<NhanvienResponse> getAllViewTable();
 

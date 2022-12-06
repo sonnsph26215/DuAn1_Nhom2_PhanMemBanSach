@@ -25,15 +25,15 @@ public class NhanVienServiceImpl implements NhanVienService {
         return this.nhanVienRepository.getAll();
     }
 
-//    @Override
-//    public Users getUserByMa(String ma) {
-//        return this.nhanVienRepository.getUserByMa(ma);
-//    }
+    @Override
+    public Users getUserByMa(String ma) {
+        return this.nhanVienRepository.getUserByMa(ma);
+    }
 
-//    @Override
-//    public Users getOne(Long id) {
-//        return this.nhanVienRepository.getOne(id);
-//    }
+    @Override
+    public Users getOne(Long id) {
+        return this.nhanVienRepository.getOne(id);
+    }
 
     @Override
     public Boolean add(Users users) {
