@@ -29,7 +29,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Users implements Serializable {
 
-     @Id
+        @Id
     @Column(name = "id")
     @GeneratedValue
     private UUID Id;
@@ -65,6 +65,9 @@ public class Users implements Serializable {
 
     @Column(name = "matKhau")
     private String matKhau;
+    
+    @Column(name = "tinhTrang")
+    private Integer tinhTrang;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ngayTao")
@@ -73,6 +76,4 @@ public class Users implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "ngayCapNhat")
     private Date ngayCapNhat;
-
-
 }
