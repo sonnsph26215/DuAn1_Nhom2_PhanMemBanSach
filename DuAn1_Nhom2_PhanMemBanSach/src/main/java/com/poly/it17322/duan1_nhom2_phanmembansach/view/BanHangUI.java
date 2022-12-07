@@ -5,7 +5,6 @@
 package com.poly.it17322.duan1_nhom2_phanmembansach.view;
 
 //import com.poly.it17322.duan1_phanmembansach_nhom2.domainmodel.ChiTietSach;
-
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -13,6 +12,7 @@ import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
+import com.google.zxing.Reader;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.Dimension;
@@ -42,36 +42,38 @@ import com.google.zxing.Result;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.service.impl.ViewHDCTServiceImpl;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.service.impl.ViewHDServiceImpl;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.service.impl.ViewSachServiceImpl;
-//import java.sql.Date;
-//import java.time.LocalDate;
-//import java.util.List;
-//import javax.swing.ButtonGroup;
-//import javax.swing.JOptionPane;
-//import javax.swing.table.DefaultTableModel;
-//import com.itextpdf.text.Document;
-//import com.itextpdf.text.DocumentException;
-//import com.itextpdf.text.Font;
-//import com.itextpdf.text.FontFactory;
-//import com.itextpdf.text.PageSize;
-//import com.itextpdf.text.Paragraph;
-//import com.itextpdf.text.pdf.CMYKColor;
-//import com.itextpdf.text.pdf.PdfDocument;
-//import com.itextpdf.text.pdf.PdfPTable;
-//import com.itextpdf.text.pdf.PdfWriter;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.domainmodel.KhachHang;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.service.KhachHangService;
 //import com.poly.it17322.duan1_phanmembansach_nhom2.service.impl.KhachHangServiceImpl;
-//import java.io.FileNotFoundException;
-//import java.io.FileOutputStream;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javax.swing.DefaultComboBoxModel;
-//import javax.swing.JFileChooser;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+
+
 /**
  *
  * @author Administrator
  */
-public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFactory {
+public class BanHangUI extends javax.swing.JPanel  {
 
 //    private ViewSachService viewSachService = new ViewSachServiceImpl();
 //    private ViewHDCTService viewHoaDonCTService = new ViewHDCTServiceImpl();
@@ -83,75 +85,70 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
 //    private DefaultTableModel model = new DefaultTableModel();
 //    private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
     private static final long serialVersionUID = 6441489157408381878L;
-    private Executor executor = Executors.newSingleThreadExecutor(this);
+//    private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
     private JTextArea textarea = null;
-
+    private Thread t1;
+    
     public BanHangUI() {
         initComponents();
 //        loadDataSP(viewSachService.getListSach());
 //        loadDataHD(viewHoaDonService.getListHDReponse());
 //        loadCBOKH(khachHangService.getList());
-//        groupLoc();
+       scannerImel();
+        
     }
     
-    public void initWebcam(JPanel panelShow) {
-        Dimension size = WebcamResolution.QVGA.getSize();
-        webcam = Webcam.getWebcams().get(0); //0 is default webcam
-        webcam.setViewSize(size);
+    public void scannerImel() {
+        Webcam webcam = Webcam.getDefault();
+        webcam.setViewSize(WebcamResolution.QVGA.getSize());
 
-        panel = new WebcamPanel(webcam);
-        panel.setPreferredSize(size);
+        WebcamPanel panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(WebcamResolution.VGA.getSize());
         panel.setFPSDisplayed(true);
-        panel.setMirrored(true);
-        panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
 
-        executor.execute(this);
-    }
+        Cam.add(panel, new AbsoluteConstraints(0, 0, 280, 181));
 
-    @Override
-    public void run() {
+        t1 = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                    }
+                    BufferedImage image = null;
+                    Result result = null;
+                    if (webcam.isOpen()) {
+                        if ((image = webcam.getImage()) == null) {
+                            continue;
+                        }
+                    }
 
-        do {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            Result result = null;
-            BufferedImage image = null;
-
-            if (webcam.isOpen()) {
-
-                if ((image = webcam.getImage()) == null) {
-                    continue;
+                    try {
+                        LuminanceSource source = new BufferedImageLuminanceSource(image);
+                        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                        Reader reader = new MultiFormatReader();
+                        result = reader.decode(bitmap);
+                    } catch (Exception e) {
+                    }
+                    if (result != null) {
+                        JOptionPane.showMessageDialog(null, result.getText());
+//                        if (indexHD != -1) {
+//                            if (bhs.addSpSanner(result.getText(), lstHoaDon.get(indexHD).getId())) {
+//                                JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công");
+//                                fillTableGH();
+//                                fillTableSP();
+//                            } else {
+//                                JOptionPane.showMessageDialog(null, "Sản phẩm không tồn tại");
+//                            }
+//                        }
+                    }
                 }
-
-                LuminanceSource source = new BufferedImageLuminanceSource(image);
-                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
-                try {
-                    result = new MultiFormatReader().decode(bitmap);
-                } catch (NotFoundException e) {
-                    // fall thru, it means there is no QR code in image
-                }
             }
-
-            if (result != null) {
-//                textarea.setText(result.getText());
-                System.out.println(result);
-            }
-
-        } while (true);
-    }
-
-    @Override
-    public Thread newThread(Runnable r) {
-        Thread t = new Thread(r, "example-runner");
-        t.setDaemon(true);
-        return t;
+        };
+        t1.start();
     }
 
 //    public void loadDataSP(List<ViewSachReponse> list) {
@@ -370,16 +367,18 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnXoaAll)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXoaAll, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXoaAll))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXoaAll)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
@@ -619,7 +618,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTaoHoaDon)
@@ -636,17 +635,7 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
         );
 
         Cam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Webcam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-
-        javax.swing.GroupLayout CamLayout = new javax.swing.GroupLayout(Cam);
-        Cam.setLayout(CamLayout);
-        CamLayout.setHorizontalGroup(
-            CamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        CamLayout.setVerticalGroup(
-            CamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        Cam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -655,10 +644,10 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Cam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -676,8 +665,8 @@ public class BanHangUI extends javax.swing.JPanel implements Runnable, ThreadFac
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(Cam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(335, 335, 335))
         );
