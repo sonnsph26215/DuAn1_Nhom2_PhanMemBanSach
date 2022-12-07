@@ -1,4 +1,3 @@
-
 package com.poly.it17322.duan1_nhom2_phanmembansach.view;
 
 import com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel.HoaDon;
@@ -12,7 +11,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class HoaDonUI extends javax.swing.JPanel {
-    
+
     private ViewTableHoaDonService serviceHD = new ViewTableHoaDonServiceImpl();
     private ViewTableHoaDonCTService serviceCt = new ViewTableHoaDonCTServieImpl();
     DefaultTableModel modelHD = new DefaultTableModel();
@@ -265,10 +264,10 @@ public class HoaDonUI extends javax.swing.JPanel {
     private void cboTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTrangThaiActionPerformed
         int row = cboTrangThai.getSelectedIndex();
 
-        if(row == 1) {
+        if (row == 1) {
             List<ViewTableHoaDon> list = serviceHD.getViewTrangThai(row - 1);
             fillToTableHD(list);
-        } else if(row == 2){
+        } else if (row == 2) {
             List<ViewTableHoaDon> list = serviceHD.getViewTrangThai(row - 1);
             fillToTableHD(list);
         }
@@ -295,14 +294,14 @@ public class HoaDonUI extends javax.swing.JPanel {
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String search = txtTimKiem.getText().trim();
         int error = 0;
-        if(search.length() == 0) {
+        if (search.length() == 0) {
             txtErrorTimKiem.setText("Khong dc de trong");
             error++;
         } else {
             txtErrorTimKiem.setText("");
         }
 
-        if(error == 0) {
+        if (error == 0) {
             List<ViewTableHoaDon> list = serviceHD.timKiem(search);
             fillToTableHD(list);
         }
