@@ -53,7 +53,8 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
-<dependency>
+<<<<<<< HEAD
+        <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
             <version>1.0.23</version>
@@ -62,15 +63,27 @@
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
             <version>1.5.0</version>
+=======
+        
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+>>>>>>> develop
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.17</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.17</version>
-        </dependency>    </dependencies>
+        </dependency>
+=======
+        
+>>>>>>> develop
+    </dependencies>
 </project>
