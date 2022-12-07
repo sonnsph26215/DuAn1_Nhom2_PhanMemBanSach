@@ -65,6 +65,9 @@ public class Users implements Serializable {
 
     @Column(name = "matKhau")
     private String matKhau;
+    
+    @Column(name = "tinhTrang")
+    private Integer tinhTrang;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ngayTao")

@@ -7,6 +7,8 @@ import com.poly.it17322.duan1_nhom2_phanmembansach.service.ThongKeService;
 import com.poly.it17322.duan1_nhom2_phanmembansach.service.impl.ThongKeServiceImpl;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
@@ -15,7 +17,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -77,7 +85,7 @@ public class ThongKeUI extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTableThongKe = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnXuatFile = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         PanelBieuDo = new javax.swing.JPanel();
 
@@ -388,10 +396,10 @@ public class ThongKeUI extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblTableThongKe);
 
-        jButton2.setText("Xuất File");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatFile.setText("Xuất File");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnXuatFileActionPerformed(evt);
             }
         });
 
@@ -405,7 +413,7 @@ public class ThongKeUI extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1276, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -414,7 +422,7 @@ public class ThongKeUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -516,9 +524,18 @@ public class ThongKeUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+        int row = cboThoiGian.getSelectedIndex();
+
+        if (row == 0) {
+            xuatFileNgay();
+        } else if (row == 1) {
+            xuatFileThang();
+        } else {
+            xuatFileNam();
+        }
+
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
      
@@ -574,10 +591,10 @@ public class ThongKeUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBieuDo;
     private javax.swing.JButton btnChon;
+    private javax.swing.JButton btnXuatFile;
     private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JComboBox<String> cboThoiGian;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -799,6 +816,148 @@ public class ThongKeUI extends javax.swing.JPanel {
         } else {
             viewTableTKNam();
             BieuDoTKNam();
+        }
+    }
+
+    private void xuatFileNgay() {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Doanh thu");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Báo cáo doanh thu");
+
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Ngày");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Số hoá đơn");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Doanh thu");
+
+            int thang = cboThang.getSelectedIndex() + 1;
+        int nam = 2022;
+            List<ViewThongKeNgay> list = service.getViewNgayTrongThang(thang, nam);
+
+            for (int i = 0; i < list.size(); i++) {
+                ViewThongKeNgay viewThongKeNgay = list.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(i + 1);
+                row.createCell(1).setCellValue(viewThongKeNgay.getNgayTao());
+                row.createCell(2).setCellValue(viewThongKeNgay.getSoHD().toString());
+                row.createCell(3).setCellValue(viewThongKeNgay.getDoanhThu().toString());
+
+            }
+
+            FileOutputStream out = new FileOutputStream(new File("D:/doanhThuNgay.xlsx"));
+            workbook.write(out);
+            JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void xuatFileThang() {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Doanh thu");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Báo cáo doanh thu");
+
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Tháng");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Số hoá đơn");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Doanh thu");
+
+        int nam = 2022;
+            List<ViewThongKeNgay> list = service.getViewThangTrongNam(nam);
+
+            for (int i = 0; i < list.size(); i++) {
+                ViewThongKeNgay viewThongKeNgay = list.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(i + 1);
+                row.createCell(1).setCellValue(viewThongKeNgay.getThang());
+                row.createCell(2).setCellValue(viewThongKeNgay.getSoHD().toString());
+                row.createCell(3).setCellValue(viewThongKeNgay.getDoanhThu().toString());
+
+            }
+
+            FileOutputStream out = new FileOutputStream(new File("D:/doanhThuThang.xlsx"));
+            workbook.write(out);
+            JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void xuatFileNam() {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Doanh thu");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Báo cáo doanh thu");
+
+            row = spreadsheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Năm");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Số hoá đơn");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Doanh thu");
+
+        int nam = 2022;
+            List<ViewThongKeNgay> list = service.getViewTKNam(nam);
+
+            for (int i = 0; i < list.size(); i++) {
+                ViewThongKeNgay viewThongKeNgay = list.get(i);
+                row = spreadsheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(i + 1);
+                row.createCell(1).setCellValue(viewThongKeNgay.getThang());
+                row.createCell(2).setCellValue(viewThongKeNgay.getSoHD().toString());
+                row.createCell(3).setCellValue(viewThongKeNgay.getDoanhThu().toString());
+
+            }
+
+            FileOutputStream out = new FileOutputStream(new File("D:/doanhThuNam.xlsx"));
+            workbook.write(out);
+            JOptionPane.showMessageDialog(this, "Xuất file thành công");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
