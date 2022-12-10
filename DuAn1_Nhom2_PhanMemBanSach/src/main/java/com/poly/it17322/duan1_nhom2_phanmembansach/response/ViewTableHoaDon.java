@@ -25,11 +25,11 @@ public class ViewTableHoaDon {
     public ViewTableHoaDon(HoaDon hoaDon) {
         this.ma = hoaDon.getMa();
         this.khachHang = hoaDon.getTenKH();
-        this.nhanVien = hoaDon.getUsers().getTen();
+//        this.nhanVien = hoaDon.getUsers().getTen();
         this.ngayTao = (Date) hoaDon.getNgayTao();
         this.ngayThanhToan = (Date) hoaDon.getNgayThanhToan();
         this.tinhTrang = hoaDon.getTinhTrang() == 0 ? "Chờ thanh toán" : "Đã thanh toán";
-        this.voucher = hoaDon.getVoucher().getTen();
+//        this.voucher = hoaDon.getVoucher().getTen();
         this.tongTien = hoaDon.getTongTien();
     }
     

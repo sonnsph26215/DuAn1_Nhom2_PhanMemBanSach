@@ -106,7 +106,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(153, 255, 153));
         setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -121,7 +121,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         });
 
         btnTimKiem.setBackground(new java.awt.Color(204, 102, 0));
-        btnTimKiem.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        btnTimKiem.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +211,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAdd.setBackground(new java.awt.Color(204, 102, 0));
-        btnAdd.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        btnAdd.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,7 +221,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         });
 
         btnUpdate.setBackground(new java.awt.Color(204, 102, 0));
-        btnUpdate.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +231,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         });
 
         btnExportExel.setBackground(new java.awt.Color(204, 102, 0));
-        btnExportExel.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        btnExportExel.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        btnExportExel.setForeground(new java.awt.Color(255, 255, 255));
         btnExportExel.setText("Export Exel");
         btnExportExel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +241,8 @@ public class NhanVienUI extends javax.swing.JPanel {
         });
 
         jButton1.setBackground(new java.awt.Color(204, 102, 0));
-        jButton1.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Clear");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -568,7 +573,7 @@ public class NhanVienUI extends javax.swing.JPanel {
 
             }
             try {
-                File f = new File("E://NhanVien.xlsx");
+                File f = new File("D:\\tam\\NhanVien.xlsx");
                 FileOutputStream fos = new FileOutputStream(f);
                 workbook.write(fos);
                 workbook.close();

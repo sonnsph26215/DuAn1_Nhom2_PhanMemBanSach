@@ -27,18 +27,20 @@ public class GiaoDienUi extends javax.swing.JFrame {
     private KhachHangUI khachHang;
     private KhuyenMaiUI khuyenMai;
     private BanHangUI banHang;
+    private VoucherUI voucher;
     
 
    
     public GiaoDienUi() {
         initComponents();
-        dongHo();
+//        dongHo();
+//        tabPan.setSelectedComponent(sach);
         
     }
 
     private GiaoDienUi(String name) {
         this();
-        lblTen.setText(name);
+//        lblTen.setText(name);
     }
 
     public void setColor(JPanel p) {
@@ -49,32 +51,32 @@ public class GiaoDienUi extends javax.swing.JFrame {
         p1.setBackground(new Color(153, 153, 255));
     }
 
-    public void dongHo() {
-        new Thread() {
-            public void run() {
-                while (true) {
-                    Calendar ca = new GregorianCalendar();
-                    int mouth = ca.get(Calendar.MONTH);
-                    int day = ca.get(Calendar.DATE);
-                    int year = ca.get(Calendar.YEAR);
-                    int hour = ca.get(Calendar.HOUR);
-                    int minute = ca.get(Calendar.MINUTE);
-                    int second = ca.get(Calendar.SECOND);
-                    int PM_AM = ca.get(Calendar.AM_PM);
-
-                    String day_night;
-                    if (PM_AM == 1) {
-                        day_night = "PM";
-                    } else {
-                        day_night = "AM";
-                    }
-                    String time = hour + ":" + minute + ":" + second + " " + day_night
-                            + "-" + day + "/" + mouth + "/" + year;
-                    lblThoiGian.setText(time);
-                }
-            }
-        }.start();
-    }
+//    public void dongHo() {
+//        new Thread() {
+//            public void run() {
+//                while (true) {
+//                    Calendar ca = new GregorianCalendar();
+//                    int mouth = ca.get(Calendar.MONTH);
+//                    int day = ca.get(Calendar.DATE);
+//                    int year = ca.get(Calendar.YEAR);
+//                    int hour = ca.get(Calendar.HOUR);
+//                    int minute = ca.get(Calendar.MINUTE);
+//                    int second = ca.get(Calendar.SECOND);
+//                    int PM_AM = ca.get(Calendar.AM_PM);
+//
+//                    String day_night;
+//                    if (PM_AM == 1) {
+//                        day_night = "PM";
+//                    } else {
+//                        day_night = "AM";
+//                    }
+//                    String time = hour + ":" + minute + ":" + second + " " + day_night
+//                            + "-" + day + "/" + mouth + "/" + year;
+//                    lblThoiGian.setText(time);
+//                }
+//            }
+//        }.start();
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,13 +89,8 @@ public class GiaoDienUi extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        lblThoiGian = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         pnGiaoDich = new javax.swing.JPanel();
         lblGiaoDich = new javax.swing.JLabel();
         pnHoaDon = new javax.swing.JPanel();
@@ -125,17 +122,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jLabel10.setText("Nhân viên:");
-
-        jLabel12.setText("Chức vụ:");
-
-        jLabel13.setText("Thời gian:");
-
-        lblThoiGian.setBackground(new java.awt.Color(204, 0, 0));
-        lblThoiGian.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblThoiGian.setForeground(new java.awt.Color(204, 0, 0));
-        lblThoiGian.setText("Thời gian");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1.png"))); // NOI18N
 
         pnGiaoDich.setBackground(new java.awt.Color(153, 153, 255));
         pnGiaoDich.setPreferredSize(new java.awt.Dimension(40, 16));
@@ -144,7 +131,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
         lblGiaoDich.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         lblGiaoDich.setForeground(new java.awt.Color(255, 255, 255));
         lblGiaoDich.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblGiaoDich.setText("Giao dịch");
+        lblGiaoDich.setText("Bán hàng");
         lblGiaoDich.setPreferredSize(new java.awt.Dimension(40, 16));
         lblGiaoDich.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -376,25 +363,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jSeparator2)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator4))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
             .addComponent(jSeparator1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblThoiGian, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(pnGiaoDich, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(pnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(pnSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -405,27 +374,15 @@ public class GiaoDienUi extends javax.swing.JFrame {
                 .addGap(1, 1, 1))
             .addComponent(pnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator2)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(lblThoiGian))
-                .addGap(0, 0, 0)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnGiaoDich, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +398,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
                 .addComponent(pnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabPan.setBackground(new java.awt.Color(255, 102, 0));
@@ -499,9 +456,9 @@ public class GiaoDienUi extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabPan, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tabPan, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -510,11 +467,11 @@ public class GiaoDienUi extends javax.swing.JFrame {
 
     private void lblKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhuyenMaiMouseClicked
         // TODO add your handling code here:
-        if (khuyenMai == null) {
-            khuyenMai = new KhuyenMaiUI();
-            tabPan.add("Khuyến mại", khuyenMai);
+        if (voucher == null) {
+            voucher = new  VoucherUI();
+            tabPan.add("Khuyến mại", voucher);
         }
-        tabPan.setSelectedComponent(khuyenMai);
+        tabPan.setSelectedComponent(voucher);
     }//GEN-LAST:event_lblKhuyenMaiMouseClicked
 
     private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
@@ -681,10 +638,7 @@ public class GiaoDienUi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -692,16 +646,12 @@ public class GiaoDienUi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator4;
-    public static final javax.swing.JLabel lblChucVu = new javax.swing.JLabel();
     private javax.swing.JLabel lblGiaoDich;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblKhacHang;
     private javax.swing.JLabel lblKhuyenMai;
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSach;
-    public static final javax.swing.JLabel lblTen = new javax.swing.JLabel();
-    private javax.swing.JLabel lblThoiGian;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JPanel pnGiaoDich;
     private javax.swing.JPanel pnHoaDon;
