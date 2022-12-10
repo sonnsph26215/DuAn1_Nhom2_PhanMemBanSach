@@ -2,6 +2,8 @@
 CREATE DATABASE CuaHangBanSach_Group2_IT17322
 USE CuaHangBanSach_Group2_IT17322
 GO
+
+select * from ChucVu
 --Chuc vu
 CREATE TABLE ChucVu(
   id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
@@ -13,6 +15,7 @@ CREATE TABLE ChucVu(
 )
 go
 
+Delete  FROM KhachHang
 -- Users
 CREATE TABLE Users(
 id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
@@ -207,8 +210,8 @@ ALTER TABLE Sach_KhuyenMai ADD CONSTRAINT FK_khuyenMai1 FOREIGN KEY (idChiTiet_S
 --sach_khuyenMai - khuyenMai
 ALTER TABLE Sach_KhuyenMai ADD CONSTRAINT FK_khuyenMai2 FOREIGN KEY (idKhuyenMai) REFERENCES KhuyenMai(id)
 
-INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV001', 'Nhân viên', 'Nhân viên')
-INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV002', 'Quản lý', 'Quản lý')
+INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV001', N'Nhân viên', N'Nhân viên')
+INSERT INTO [dbo].[ChucVu]([ma],[tenCV],[moTa])VALUES('CV002', N'Quản lý', N'Quản lý')
 INSERT INTO [dbo].[Sach]([ma],[tenSach],[tinhTrang])VALUES('S001', N'Gió lạnh đầu mùa', 0)
 INSERT INTO [dbo].[Sach]([ma],[tenSach],[tinhTrang])VALUES('S002', N'Nắng trong vườn', 0)
 INSERT INTO [dbo].[Sach]([ma],[tenSach],[tinhTrang])VALUES('S003', N'Nhà hai mẹ con', 0)
@@ -229,8 +232,8 @@ INSERT INTO [dbo].[TheLoai]([ma],[tenTL])VALUES('TL002', N'Văn học Nước Ng
 INSERT INTO [dbo].[TheLoai]([ma],[tenTL])VALUES('TL003', N'Lịch sử truyền thống')
 INSERT INTO [dbo].[TheLoai]([ma],[tenTL])VALUES('TL004', N'Kiến thức - Khoa học')
 INSERT INTO [dbo].[TheLoai]([ma],[tenTL])VALUES('TL005', N'Truyện tranh')
-select * from Sach
-select * from TacGia
+select * from Users
+select * from ChucVu
 select * from TheLoai
 select * from NXB
 INSERT INTO [dbo].[ChiTiet_Sach]([idTacGia],[idTheLoai],[idNXB],[idSach],[SoLuongTon],[donGia],[moTa],[hinhAnh])
@@ -241,3 +244,5 @@ INSERT INTO [dbo].[ChiTiet_Sach]([idTacGia],[idTheLoai],[idNXB],[idSach],[SoLuon
 	 VALUES('3BA0140F-DDA0-420C-8D67-98CB349F9B1B', 'FC1902FF-7B8B-4678-8982-9AA3542EEF7D', '9EF8C1FD-BA80-4483-8424-697C8E378110', '2FC84A18-C5D1-49C4-822B-ECBF2CCE0D12', 100, 20000, N'Tập truyện ngắn', null)
 INSERT INTO [dbo].[ChiTiet_Sach]([idTacGia],[idTheLoai],[idNXB],[idSach],[SoLuongTon],[donGia],[moTa],[hinhAnh])
 	 VALUES('E147327D-F8C6-487B-962B-B4F7F653B406', '3581B890-3408-4143-B95F-D8C6EAAAF48C', '9EF8C1FD-BA80-4483-8424-697C8E378110', '7B5887DE-6DEF-41A5-B281-DE614970103E', 70, 25000, N'Tập truyện ngắn', null)
+
+	 Delete from ChucVu

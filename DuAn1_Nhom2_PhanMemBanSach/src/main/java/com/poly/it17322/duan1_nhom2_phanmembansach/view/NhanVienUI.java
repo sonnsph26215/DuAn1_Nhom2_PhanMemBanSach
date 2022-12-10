@@ -109,6 +109,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1000, 700));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
@@ -153,11 +154,13 @@ public class NhanVienUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel4.setFont(new java.awt.Font("Arial Unicode MS", 1, 14)); // NOI18N
         jLabel4.setText("Thông tin nhân viên");
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setFont(new java.awt.Font("Arial Unicode MS", 0, 14)); // NOI18N
@@ -601,7 +604,7 @@ public class NhanVienUI extends javax.swing.JPanel {
 
         users.setNgayTao(Date.valueOf(LocalDate.now()));
 
-        if (service.update(users)) {
+        if (service.add(users)) {
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
             List<NhanvienResponse> listNV = service.getAllViewTable();
             loadTable(listNV);
