@@ -1,6 +1,8 @@
 package com.poly.it17322.duan1_nhom2_phanmembansach.domainmodel;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,13 +27,13 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class Users implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
     @Column(name = "id")
-    private Long id;
-
+    @GeneratedValue
+    private UUID Id;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idChucVu", referencedColumnName = "id")
     private ChucVu chucVu;
@@ -63,6 +65,9 @@ public class Users {
 
     @Column(name = "matKhau")
     private String matKhau;
+    
+    @Column(name = "tinhTrang")
+    private Integer tinhTrang;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ngayTao")
@@ -71,5 +76,4 @@ public class Users {
     @Temporal(TemporalType.DATE)
     @Column(name = "ngayCapNhat")
     private Date ngayCapNhat;
-
 }
